@@ -1,0 +1,12 @@
+node_modules/
+work/
+.env
+.env.*
+!.env.example
+*.log
+*.tgz
+*.patch
+!.github/**
+data/
+taste-memory*.json
+steam-library*.json
