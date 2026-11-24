@@ -8,6 +8,8 @@ Covered behavior: consent before request; same-account/country cache isolation; 
 
 `pnpm audit --json` against the npm advisory service reported **0 info, 0 low, 0 moderate, 0 high and 0 critical** known vulnerabilities for this installed dependency set. This is a point-in-time advisory check, not a security guarantee. Source credential/private-data pattern scanning also passed; only generated project code, public documentation and synthetic tests are included in publication.
 
+GitHub Actions [run 45512306637](https://github.com/Godel-Infinity-Machine/know-yourself-through-play/actions/runs/45512306637) passed for implementation commit `cbe1dea47b43a6c5d7825202808c02adf147544b`. Package generation with `pnpm pack` and CLI help were also executed successfully. The package includes the worked example and third-party notices referenced by its README.
+
 | Product acceptance item | Evidence and actual status |
 | --- | --- |
 | A. Real authorized Steam profile | **Pending live authorization/configuration**. Synthetic transport/consent/cache tests passed. No real library is committed. Ownership/playtime do not produce preferences in code. A real model's initial profiling quality has not been assessed. |
