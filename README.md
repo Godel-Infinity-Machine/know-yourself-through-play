@@ -1,127 +1,72 @@
 # Know Yourself Through Play
 
-*Not just what you play, but why you play.*
+*成瘾让人忘记自己，真正契合的游戏却能让你认出自己。*  
+*每款让你念念不忘的游戏，都恰好以你偏爱的方式，回馈了你的行动。*
 
-A psychology-informed, memory-enabled gaming companion for DeepSeek Harness.
+一个面向 **DeepSeek Harness** 的游戏发现与自我探索插件。  
+它不为消磨时间，也不为制造停不下来的黏性循环。只需聊聊你玩过、偏爱或中途放下的作品（也可按需导入已授权的 Steam 游戏库），它便透过**游戏对行动反馈的奖励机制**，陪你看清自己真正被怎样的回馈打动，并寻出下一款真正值得投入的游戏。
 
-Understand the motivations behind your gaming experiences, discover what truly rewards you, and find games that match your intrinsic motivations.
+[English](./README.md) · [研究说明](./docs/research.md) · [隐私说明](./docs/privacy.md) · [验证记录](./docs/validation.md)
 
-[中文](README.zh-CN.md) · [Research](docs/research.md) · [Privacy](docs/privacy.md) · [Validation](docs/validation.md)
+---
 
-**A game recommendation harness built around actions, feedback and possible psychological rewards, with a Taste Memory you can correct over time.** Implemented as a native plugin for **DeepSeek Harness 0.2.3-alpha.2**, it helps you explore what you enjoy doing in games, which responses make those actions satisfying, and what interrupts that experience. Through the games you play and the feedback you give, you can learn more about your own experience preferences.
+## 为什么需要另一种推荐
 
-Its primary matching target is the experience you seek, rather than shared content, genres or Steam tags. Games from different genres can offer similar satisfaction through discovery, experimentation or mastery; similar-looking games can differ in feedback and failure costs. Content and genre still matter when you explicitly request or exclude them. The harness uses published game-psychology research as a reference for tentative explanations, not as proof that it has measured your motives.
+市面上大多数游戏推荐，归根结底只做两件事：
 
-This is an early MVP. It reuses DSH's model, native web tools, tool registry and dynamic context. One persistent Taste Memory connects an explicitly authorized Steam import with natural-language exploration.
+* **拼凑外壳的相似**：看题材、堆标签、按品类归类，或者套用“买过 A 的人也买过 B”。结果常常是纸面上严丝合缝，上手却味同嚼蜡。
+* **迎合本能的成瘾**：以拉长时长、提高留存为隐性目标，靠随机刺激、数值焦虑与惯性拴住你。可关掉屏幕之后，留下的只有被掏空的疲惫。
 
-## From play to possible motivations
+**我们不把“让你玩得更久”当作成功。**  
+决定一场游玩究竟是消耗还是丰盈的，从来不是题材外壳有多像，而是**你做出行动后，游戏以怎样的奖励机制回应了你**：
 
-| Lens | What the companion explores |
-| --- | --- |
-| **Action** | What you enjoy actively doing: exploring, experimenting, creating, reasoning, practising or cooperating. |
-| **Feedback** | What makes you want to continue: new information, a clearer explanation, visible improvement or a responsive system. |
-| **Reward** | What satisfaction that might provide: autonomy, competence, curiosity, connection or meaning. These are possible interpretations, not measured scores. |
-| **Friction** | What weakens the experience: repetitive work, costly retries, unclear feedback or unwanted guidance. |
+* **外壳天差地别，奖赏却同出一源**  
+  《星际拓荒》的宇宙漫游、《异星工厂》的产线推演、《奥伯拉丁的回归》的线索勘破——题材和玩法毫无交集，却都在奖赏同一件事：在未知与复杂中理出秩序，让“看懂”本身成为回报。
+* **标签如出一辙，体验却南辕北辙**  
+  同样是高难度挑战，有的把每一次试错都变成清晰可控的精进，有的却用冗长跑图、高额回退或机械刷取，迅速磨光你的热情。
 
-**Action → Feedback → Reward → Friction is this project's reasoning scaffold, not a validated unified psychological theory.** Enjoying an action and enjoying its outcome are different possibilities. Owning a game, playing for many hours or playing recently does not establish liking or a particular psychological need.
+**Know Yourself Through Play** 把游戏当作一面镜子：先借你玩过的作品，照见自己偏爱的奖赏与厌恶的阻力；再跳出既有的类型茧房，去寻找真正能带来满足感的新作。
 
-## Memory you can improve
+---
 
-Taste Memory stores useful human statements, observed play and tentative hypotheses separately. Your explicit feedback takes priority over an inference. Corrections revise the relevant hypothesis while preserving unrelated evidence, counterexamples and conditions; the updated memory enters later recommendation context, including after a restart. This is refinement of the companion's understanding of **your preferences**, not model training or an agent that evolves its own strategy.
+## 核心机制
 
-For example, “I enjoy discovering rules, not managing production” should move the explanation toward autonomous discovery, rather than treating construction as an established preference. Later recommendations should explain how their actions and feedback fit that correction, while disclosing friction and unknowns. You can inspect, correct, export or delete memory, and you have the final say about your own experience. See the [worked example](examples/exploration.md) and [actual feedback/restart test](docs/live-acceptance-2026-11-25.md).
+* **以奖励机制为镜**  
+  参照自我决定理论（SDT）与玩家体验量表（PXI）等已发表的游戏心理学研究，梳理游戏对行动的奖励方式与潜在阻力。所有洞察都是供你审视的**探索性假设**，而非人格标签。
+* **自然对话 + 可选 Steam 授权导入**  
+  无需填写问卷。你可以直接用自然语言聊起玩过的作品，也可以按需接入已授权的 Steam 游戏库作为探索起点。
+* **奖赏匹配与精准排雷**  
+  既循着你偏爱的奖励机制跨类型寻游，也提前标出容易打断体验的摩擦点，少走“看着像、玩着累”的弯路。
+* **可随时修正的品味记忆**  
+  你的偏好记录与品味假设默认保存在本地，随每一次真实反馈动态校准；你拥有绝对的解释权，可以随时查看、反驳、改写或清空。
 
-## Scope and privacy
+---
 
-> Know Yourself Through Play draws on published game-psychology research and your gaming experiences and feedback to help you explore personal gaming motivations and experience preferences. All personal analyses are exploratory hypotheses for entertainment, self-reflection and game selection. They do not constitute medical advice, psychological counselling, psychological assessment or diagnosis, and cannot replace professional services.
+## 快速开始
 
-The companion does not assign personality types, clinical labels, psychological probability scores or dopamine explanations. Published theories and scale constructs inform reasoning; group findings do not measure an individual, correlations do not establish causation, and no protected questionnaire items are administered. Recommendations and hypotheses can be wrong and remain open to correction.
+> **早期 MVP 说明**：当前为面向 **DeepSeek Harness** 的早期版本，直接复用 DSH 的模型、工具注册、联网检索与上下文能力，将自然语言探索与可选的 Steam 授权导入连接在同一份持久化的品味记忆中。
 
-Steam import requires active consent. Taste Memory defaults to a local, unencrypted JSON file; relevant memory and library observations enter DSH context and may be sent to its configured remote model. This plugin enables no telemetry; DSH and model providers have their own retention and telemetry settings. Clearing Taste Memory does not delete their records or your backups. Read [privacy and data handling](docs/privacy.md) before importing.
+1. 在 **DeepSeek Harness** 中安装并启用本插件（配置见 `cordis.patch.yml` 与 `package.json`）。
+2. 如需结合已授权的 Steam 游戏库信息，可在 `.env` 中按需配置（详见 [隐私说明](./docs/privacy.md)）。
+3. 无需问卷，直接开口聊天即可。
 
-## What it does
+### 试试这样聊
 
-- Explores **Action → Feedback → Reward → Friction**, a project reasoning scaffold rather than a validated psychological theory.
-- Separates exact human statements, Steam observations and tentative motivation hypotheses, with supporting evidence, counterexamples and conditions.
-- Revises a specific hypothesis after user disagreement, preserves unrelated history, and injects the corrected memory into the next DSH model context.
-- Guides approximately three recommendations by motives and actual mechanics, with Steam links, sources, unknowns and friction. Native DSH web search/fetch verify candidates when available; there is no bundled game catalogue or genre/tag ranking engine.
-- Imports only a user-requested API-visible library, through the local CLI. Ownership and minutes never automatically become positive preferences.
-- Supports local inspect, edit, export, individual forgetting and complete Taste Memory clearing. No plugin telemetry, database, vector store, separate agent runtime or frontend.
+* *“我很喜欢《星际拓荒》和《异星工厂》，推荐几款类型完全不同、但奖励机制同样能打动我的游戏。”*
+* *“为什么《蔚蓝》卡关我愿意反复尝试，遇到死亡惩罚很重或靠刷刷刷留住人的游戏却会立刻失去耐心？”*
+* *“最近想玩点靠观察与推理理清脉络的作品，不要重复劳作，顺便帮我排排雷。”*
+* *“给我看看你现在对我游戏口味的猜想，我觉得有几条不准，想改一改。”*
 
-## Install
+---
 
-Requirements: Node **24.22.3+**, pnpm, and a separately installed/configured **DeepSeek Harness 0.2.3-alpha.2**. Other DSH versions have not been verified. Configure the model and usable native web providers in DSH itself; this plugin supplies no model key or search provider.
+## 克制与边界
 
-```sh
-git clone https://github.com/Godel-Infinity-Machine/know-yourself-through-play.git
-cd know-yourself-through-play
-pnpm install --frozen-lockfile
-pnpm check
-# Initialize only when creating a NEW gaming profile:
-dsh --profile gaming --from-default-profile tui --dump-config
-dsh plugin --profile gaming add .
-dsh --profile gaming --dump-config
-dsh --profile gaming
-```
+* **假设而非定论**：所有心理学视角仅作自我认识与选游参考，不构成心理测评、人格鉴定或医学诊断。你的真实感受永远高于一切推断。
+* **记忆归你掌控**：品味记忆默认保存在本地，Steam 授权范围与数据流向详见 [隐私说明](./docs/privacy.md)。
+* **诚实的能力边界**：作为早期 MVP，推荐覆盖度受限于现有游戏资料、可用接口与验证范围，详见 [研究说明](./docs/research.md) 与 [验证记录](./docs/validation.md)。
 
-Initialize the new profile from `tui` so it has a conversational surface. Skip `--from-default-profile` for an existing profile: that option replaces its composition. `lib/` is committed for installation without a prepare hook. To install straight from GitHub into the initialized profile, use `dsh plugin --profile gaming add github:Godel-Infinity-Machine/know-yourself-through-play#COMMIT_SHA` with a reviewed real commit. No npm release is claimed. To remove: `dsh plugin --profile gaming remove dsh-know-yourself-through-play`.
+---
 
-The default file is `~/.dsh/know-yourself-through-play/taste-memory.json`. Set `KYTP_MEMORY_FILE` to the same absolute local file for both CLI and DSH, or configure the plugin's `memoryFile` via a DSH profile patch:
+## 开源协议
 
-```yaml
-- id: know-yourself-through-play
-  config:
-    memoryFile: /absolute/private/path/taste-memory.json
-```
-
-Use one local person's data per profile/file. A DSH deployment's own persistence is not assumed to be a taste store. [API verification and fallback decision](docs/dsh-verification.md).
-
-## Start with conversation
-
-Tell DSH, in any language:
-
-> I like Outer Wilds and Factorio. What might they have in common?
->
-> I enjoy discovering rules, not managing production. Please remember that correction and suggest three games. Exclude repetitive combat.
-
-The agent should offer competing, tentative explanations and record only useful evidence. Explicit confirm/reject status requires the human command `/taste confirm HYPOTHESIS_ID` or `/taste reject HYPOTHESIS_ID reason`; these are ordinary chat messages interpreted by the companion, not registered native slash-command UI actions. Natural feedback revises immediately but the replacement stays tentative. The single `taste_memory` tool validates human quotation provenance.
-
-## Start with Steam
-
-Read [privacy and Steam terms](docs/privacy.md), then set `STEAM_API_KEY` in the local environment using your normal secret-management method. Never put it in a chat, command argument, source file or GitHub. SteamID64 is an identifier, not a password or authentication token. The library's game details must be visible to the official API. Do not supply Steam passwords/cookies.
-
-```sh
-node lib/cli.js help
-node lib/cli.js import-steam --steam-id YOUR_STEAMID64 --country YOUR_STORAGE_COUNTRY --consent-local-storage --consent-model-context
-dsh --profile gaming
-```
-
-After import ask: “Explore my imported library. Separate ownership/time from enjoyment and suggest tentative motives I can correct.” Both entries read the same file. `--country` means where **this machine** stores data. Both consent flags acknowledge local storage and possible remote model transmission; they are not Steam OAuth. A same-account snapshot is reused for 15 minutes unless `--refresh` is supplied. If import fails, manually describe liked/disliked/played games.
-
-## Control your memory
-
-```sh
-node lib/cli.js show
-node lib/cli.js export --output /private/location/export.json
-node lib/cli.js replace --input /private/location/edited-export.json --confirm-replace
-node lib/cli.js forget --id FACT_OR_HYPOTHESIS_ID --confirm-delete
-node lib/cli.js clear --confirm-delete
-```
-
-Add `--file ABSOLUTE_PATH` to any CLI command to override storage. Exports refuse existing files. Forget removes dependent hypotheses. Local clear does not erase DSH logs, provider records or backups. Memory is unencrypted; protect the file and exports with your OS account permissions.
-
-## Science, tests and limitations
-
-[Five verified research references](docs/research.md) constrain vocabulary and uncertainty; no protected scale questions, psychological scores or individual causal claims are used. [Worked example](examples/exploration.md) shows cross-type motives, counterexamples and feedback correction; it is a written illustration, not a fabricated live transcript.
-
-```sh
-pnpm typecheck
-pnpm build
-pnpm test
-pnpm bench
-pnpm audit:source
-```
-
-[Actual results and acceptance boundaries](docs/validation.md), including [live DSH/model runs](docs/live-acceptance-2026-11-25.md), distinguish real local integration tests, synthetic preference scenarios with a real model, and authorized-library checks. Model-level scientific quality, recommendation accuracy, hard-exclusion adherence and jailbreak resistance remain dependent on the configured DSH model; prompt rules are not a deterministic guarantee. The plugin does not certify all A–H product acceptance tests as universally passed. Large profiles need user curation; context includes all active hypotheses, relevant/recent quotations and the top 25 games by minutes, with ownership count, not every library row.
-
-MIT for project code. Installed dependency metadata was reviewed: MIT libraries and Apache-2.0 TypeScript tooling; upstream licenses remain applicable. See [third-party notes](THIRD_PARTY_NOTICES.md). **No DSH community submission has been made**, per the owner's instruction.
+[MIT](./LICENSE) · 第三方声明见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)
