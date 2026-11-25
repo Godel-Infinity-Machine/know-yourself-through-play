@@ -54,7 +54,7 @@ What makes a session feel exhausting or deeply fulfilling is rarely how similar 
 * *"Why am I happy to retry a hard screen in Celeste fifty times, yet instantly lose patience with heavy death penalties or endless grinding?"*
 * *"I'm in the mood for something built around observation and deduction, with zero busywork—and warn me about any dealbreakers."*
 * *"Show me what you currently assume about my gaming taste. A few of those feel off, and I want to correct them."*
-* * *"I'm a longtime player and already know most classics. Search the web for recent releases this time, recommend three that fit the actions and rewards you remember I enjoy, verify their release dates, and flag potential dealbreakers."*
+* *"I'm a longtime player and already know most classics. Search the web for recent releases this time, recommend three that fit the actions and rewards you remember I enjoy, verify their release dates, and flag potential dealbreakers."*
 
 ---
 
