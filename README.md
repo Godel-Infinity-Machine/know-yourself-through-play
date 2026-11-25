@@ -8,6 +8,8 @@ It isn't built to kill time or trap you in sticky engagement loops. Just talk ab
 
 [中文](./README.zh-CN.md) · [Research](./docs/research.md) · [Privacy](./docs/privacy.md) · [Validation](./docs/validation.md)
 
+[Watch the demo](https://github.com/Godel-Infinity-Machine/know-yourself-through-play/raw/refs/heads/main/docs/assets/know-yourself-through-play-demo.mp4)
+
 ---
 
 ## Why Another Kind of Recommender

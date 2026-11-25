@@ -8,6 +8,8 @@
 
 [English](./README.md) · [研究说明](./docs/research.md) · [隐私说明](./docs/privacy.md) · [验证记录](./docs/validation.md)
 
+[观看演示视频](https://github.com/Godel-Infinity-Machine/know-yourself-through-play/raw/refs/heads/main/docs/assets/know-yourself-through-play-demo.mp4)
+
 ---
 
 ## 为什么需要另一种推荐
