@@ -28,12 +28,14 @@ git clone https://github.com/Godel-Infinity-Machine/know-yourself-through-play.g
 cd know-yourself-through-play
 pnpm install --frozen-lockfile
 pnpm check
+# Initialize only when creating a NEW gaming profile:
+dsh --profile gaming --from-default-profile tui --dump-config
 dsh plugin --profile gaming add .
 dsh --profile gaming --dump-config
 dsh --profile gaming
 ```
 
-`lib/` is committed for installation without a prepare hook. To install straight from GitHub, use `dsh plugin --profile gaming add github:Godel-Infinity-Machine/know-yourself-through-play#COMMIT_SHA` with a reviewed real commit. No npm release is claimed. To remove: `dsh plugin --profile gaming remove dsh-know-yourself-through-play`.
+Initialize the new profile from `tui` so it has a conversational surface. Skip `--from-default-profile` for an existing profile: that option replaces its composition. `lib/` is committed for installation without a prepare hook. To install straight from GitHub into the initialized profile, use `dsh plugin --profile gaming add github:Godel-Infinity-Machine/know-yourself-through-play#COMMIT_SHA` with a reviewed real commit. No npm release is claimed. To remove: `dsh plugin --profile gaming remove dsh-know-yourself-through-play`.
 
 The default file is `~/.dsh/know-yourself-through-play/taste-memory.json`. Set `KYTP_MEMORY_FILE` to the same absolute local file for both CLI and DSH, or configure the plugin's `memoryFile` via a DSH profile patch:
 
@@ -91,6 +93,6 @@ pnpm bench
 pnpm audit:source
 ```
 
-[Actual results and pending acceptance gates](docs/validation.md) distinguish real local integration tests from live model/authorized-library tests. Model-level scientific quality, recommendation accuracy, hard-exclusion adherence and jailbreak resistance remain dependent on the configured DSH model; prompt rules are not a deterministic guarantee. The plugin does not certify all A–H product acceptance tests as passed. Large profiles need user curation; context includes all active hypotheses, relevant/recent quotations and the top 25 games by minutes, with ownership count, not every library row.
+[Actual results and acceptance boundaries](docs/validation.md), including [live DSH/model runs](docs/live-acceptance-2026-11-25.md), distinguish real local integration tests, synthetic preference scenarios with a real model, and authorized-library checks. Model-level scientific quality, recommendation accuracy, hard-exclusion adherence and jailbreak resistance remain dependent on the configured DSH model; prompt rules are not a deterministic guarantee. The plugin does not certify all A–H product acceptance tests as universally passed. Large profiles need user curation; context includes all active hypotheses, relevant/recent quotations and the top 25 games by minutes, with ownership count, not every library row.
 
 MIT for project code. Installed dependency metadata was reviewed: MIT libraries and Apache-2.0 TypeScript tooling; upstream licenses remain applicable. See [third-party notes](THIRD_PARTY_NOTICES.md). **No DSH community submission has been made**, per the owner's instruction.

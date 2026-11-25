@@ -28,12 +28,14 @@ git clone https://github.com/Godel-Infinity-Machine/know-yourself-through-play.g
 cd know-yourself-through-play
 pnpm install --frozen-lockfile
 pnpm check
+# 仅在新建 gaming profile 时执行下面这一行：
+dsh --profile gaming --from-default-profile tui --dump-config
 dsh plugin --profile gaming add .
 dsh --profile gaming --dump-config
 dsh --profile gaming
 ```
 
-仓库提供编译后的 `lib/`，不需要 Git 安装时执行 prepare 脚本。也可用 `dsh plugin --profile gaming add github:Godel-Infinity-Machine/know-yourself-through-play#COMMIT_SHA` 安装经过审查的真实提交。没有声称已发布 npm 包。卸载用 `dsh plugin --profile gaming remove dsh-know-yourself-through-play`。
+新 profile 先从 `tui` 初始化，才有对话界面；已有 profile 请跳过 `--from-default-profile`，因为它会替换现有组合。仓库提供编译后的 `lib/`，不需要 Git 安装时执行 prepare 脚本。也可在初始化后用 `dsh plugin --profile gaming add github:Godel-Infinity-Machine/know-yourself-through-play#COMMIT_SHA` 安装经过审查的真实提交。没有声称已发布 npm 包。卸载用 `dsh plugin --profile gaming remove dsh-know-yourself-through-play`。
 
 默认记忆文件为 `~/.dsh/know-yourself-through-play/taste-memory.json`。通过环境变量 `KYTP_MEMORY_FILE` 设置 CLI 与 DSH 共同使用的绝对路径，或在 DSH profile patch 中配置：
 
@@ -87,7 +89,7 @@ pnpm bench
 pnpm audit:source
 ```
 
-[真实测试报告](docs/validation.md)区分本地原生集成测试与仍待真实凭据的验收。不能将提示词规则视为推荐质量、硬性排除或科学合规的确定性保证。没有真实模型与授权游戏库时，不声称 A–H 全部通过，也不编造完整响应耗时。当前动态上下文保留有效假设、相关与近期原话，以及时长最高的 25 款游戏；大型画像需要用户整理。
+[真实测试报告](docs/validation.md)与[真实 DSH／模型验收](docs/live-acceptance-2026-11-25.md)区分本地原生集成测试、真实模型上的模拟偏好案例，以及授权游戏库检查。不能将提示词规则视为推荐质量、硬性排除或科学合规的确定性保证，不把成功案例宣称为 A–H 的普遍保证，也不编造完整响应耗时。当前动态上下文保留有效假设、相关与近期原话，以及时长最高的 25 款游戏；大型画像需要用户整理。
 
 [完整探索与修正示例](examples/exploration.md)是明确标注的人工示例，不是伪造模型运行记录。论文核验包括 SDT、PXI、BANGS、DEEP 和 28 Dimensions of Play，不复制受保护量表题目，不输出心理概率分数。
 

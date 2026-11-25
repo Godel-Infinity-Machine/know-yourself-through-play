@@ -15,4 +15,6 @@ Inspected official [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-ha
 
 Only one local person may use a profile/memory file. Scope the plugin to a dedicated gaming profile. The plugin does not install a runtime, choose a model, enable broad permissions, create agents, override existing web providers, or claim end-to-end model tests without actual credentials. Recommendation quality and research budgets are model instructions, not a deterministic ranking engine or a runtime quota.
 
+Follow-up on 2026-11-25: the official CLI and SDK were installed into an isolated development directory, a profile was initialized from the shipped SDK template, and the completed bundle was successfully installed by the native plugin manager. Actual model runs used the existing pi-ai adapter with a user-specified Responses-compatible route. This is test infrastructure, not an additional runtime dependency of the plugin. [Live acceptance record](live-acceptance-2026-11-25.md).
+
 Community status: **not submitted**, as requested. No issue, PR, market listing, npm release, or upstream plugin submission has been made. Future submission: rerun compatibility/live acceptance, choose a reviewed commit, then follow the official plugin market format and contribution instructions. Obtain a separate user instruction before submitting.
