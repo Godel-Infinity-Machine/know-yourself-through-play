@@ -38,6 +38,16 @@ What makes a session feel exhausting or deeply fulfilling is rarely how similar 
 * **Input-Bar Recommendation Controls**
   Use **Web Search** and recommend **Recent New Games** to control this Session. 
 ---
+## Try Asking
+
+Each prompt below targets a core capability—from diagnosing why popular games bounce off you to refining your Taste Memory.
+
+* **Cross-genre discovery (beyond surface tags)**: *"I've sunk hundreds of hours into Slay the Spire and Into the Breach, even though I normally bounce off turn-based RPGs. What am I actually chasing here, and what completely different genres deliver that same feeling?"*
+* **Diagnosing a mismatch (especially with Steam import)**: *"Looking at my play history, I dropped massive hits like Red Dead Redemption 2 within five hours, yet played Balatro non-stop. Help me figure out what specific friction turns me off and what feedback loops hook me."*
+* **Constraint-based filtering (dealbreakers first)**: *"I'm burnt out after work—recommend something I can finish a run of in 20 minutes without heavy story reading or twitch reflexes, while still giving me strategic planning satisfaction. Flag any hidden dealbreakers."*
+* **Challenging & editing Taste Memory**: *"Show me what you currently assume about my gaming taste. Also, correct one thing: I don't actually dislike high difficulty—I just hate losing progress to long runbacks. Update that."*
+* **Recent full-release search** *(select **Recent New Games** first)*: *"I've already played most classic single-player strategy and deduction games. Search the web for recent full releases (skip Early Access) from the past few months that fit my preferences, verify their release dates, and warn me about potential friction."*
+---
 
 ## Install, Configure, and Run
 
@@ -123,16 +133,6 @@ Two toggles sit in the DSH Web/desktop composer (**Web Search** and **Recent New
 * Web-enabled modes still require a configured, working DSH web provider; unavailable search results are disclosed rather than fabricated, and recent-release filtering is model-guided rather than exhaustive.
 
 </details>
-
-## Try Asking
-
-Each prompt below targets a core capability—from diagnosing why popular games bounce off you to refining your Taste Memory.
-
-* **Cross-genre discovery (beyond surface tags)**: *"I've sunk hundreds of hours into Slay the Spire and Into the Breach, even though I normally bounce off turn-based RPGs. What am I actually chasing here, and what completely different genres deliver that same feeling?"*
-* **Diagnosing a mismatch (especially with Steam import)**: *"Looking at my play history, I dropped massive hits like Red Dead Redemption 2 within five hours, yet played Balatro non-stop. Help me figure out what specific friction turns me off and what feedback loops hook me."*
-* **Constraint-based filtering (dealbreakers first)**: *"I'm burnt out after work—recommend something I can finish a run of in 20 minutes without heavy story reading or twitch reflexes, while still giving me strategic planning satisfaction. Flag any hidden dealbreakers."*
-* **Challenging & editing Taste Memory**: *"Show me what you currently assume about my gaming taste. Also, correct one thing: I don't actually dislike high difficulty—I just hate losing progress to long runbacks. Update that."*
-* **Recent full-release search** *(select **Recent New Games** first)*: *"I've already played most classic single-player strategy and deduction games. Search the web for recent full releases (skip Early Access) from the past few months that fit my preferences, verify their release dates, and warn me about potential friction."*
 
 ---
 
