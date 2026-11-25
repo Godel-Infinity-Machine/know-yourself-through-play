@@ -1,102 +1,82 @@
 # Know Yourself Through Play
 
-*Not just what you play, but why you play.*
+*每款让你念念不忘的游戏，都恰好以你偏爱的方式，回馈了你的行动。*
 
-A psychology-informed, memory-enabled gaming companion for DeepSeek Harness.
+一个面向 **DeepSeek Harness** 的游戏发现与自我探索插件。
+你可以直接聊聊玩过、偏爱或放下的作品，也可以主动授权导入 Steam 游戏库，结合本地保存的品味记忆继续探索——它不以延长游玩时长为目标，而是循着游戏对行动给出的**反馈与奖励机制**，陪你在游玩中更了解自己，发现更契合内在动机的游戏。
 
-Understand the motivations behind your gaming experiences, discover what truly rewards you, and find games that match your intrinsic motivations.
+[English](./README.md) · [研究说明](./docs/research.md) · [隐私说明](./docs/privacy.md) · [验证记录](./docs/validation.md)
 
-[English](README.md) · [论文与核验](docs/research.md) · [隐私](docs/privacy.md) · [真实测试记录](docs/validation.md)
+---
 
-**一个围绕行动、反馈与可能的心理奖励进行游戏推荐，并能通过你的反馈持续修正记忆的 Harness。** 项目以 **DeepSeek Harness 0.2.3-alpha.2 原生插件**实现，帮助你探索：自己喜欢在游戏中主动做什么，什么反馈让这些行动变得满足，以及什么机制会破坏体验。通过你玩的游戏和你对体验的反馈，更了解自己的体验偏好。
+## 与以往推荐的本质不同
 
-**推荐的主要依据是你追求的体验，而不是内容、类别或 Steam 标签的相似性。** 不同类型的游戏，可能通过发现、实验或能力进步带来相似的满足；看似相似的游戏，也可能因为反馈方式和失败成本不同而带来截然不同的体验。你明确提出的题材、类别要求与排除条件仍然优先。已发表的游戏心理学研究用于约束探索性解释，不代表模型已经科学测量了你的动机。
+基于标签与题材的推荐，可以帮助你找到外观、内容或类别相近的游戏。本项目进一步关心：**你在游戏里主动做了什么，游戏怎样回应，而你真正享受的是其中哪一部分。**
 
-当前是早期 MVP。复用 DSH 模型、原生联网工具、工具注册和动态上下文；主动授权的 Steam 游戏库导入与自然语言探索共享一套持久化 Taste Memory。
+我们不以“让你玩得更久”为优化目标，而是关心：关掉屏幕后，你是否觉得这段体验值得投入。游戏时长本身既不能证明满足，也不能判断成瘾。
 
-## 从游戏体验探索可能的动机
+**值得探索的，不只是下一款游戏，还有你为何享受它。**
+除了题材与类型，我们更关注**游戏对你的行动给出了怎样的反馈与奖励机制**：
 
-| 维度 | 探索的问题 |
-| --- | --- |
-| **Action · 行动** | 你喜欢主动做什么：探索、实验、创造、推理、练习或合作？ |
-| **Feedback · 反馈** | 什么回应让你愿意继续：新信息、解释成立、能力进步或系统变化？ |
-| **Reward · 奖励** | 这些体验可能带来什么满足：自主感、胜任感、好奇心、连接感或意义感？这是待验证的解释，不是测量分数。 |
-| **Friction · 摩擦** | 什么会削弱体验：重复劳动、失败后的高回退成本、反馈不清或过度引导？ |
+- **跨过类型，遇见相似的满足**
+  《星际拓荒》的宇宙探索、《异星工厂》的产线推演、《奥伯拉丁的回归》的线索推理，玩法各异，却可能让同一个人享受到相似的过程——在未知与复杂中建立理解，让“看懂”本身成为回报。这是有待本人确认的解释，不是仅凭游戏名称就能得出的结论。
+- **外壳相近，体验却可能相背**
+  同样涉及高难度挑战或长篇叙事，有的体验让每一次尝试带来清晰的进步反馈，有的则可能因为较高的失败回退成本、重复劳动或反馈不清而磨平兴致。你的题材偏好与明确排除条件也始终重要。
 
-**Action → Feedback → Reward → Friction 是项目的推理框架，不是经过验证的统一心理学理论。** 喜欢行动本身和喜欢行动带来的结果，需要分别考虑。拥有、游玩时长或最近玩过，都不能直接证明喜欢，也不能据此测量心理需求。
+因此，**Know Yourself Through Play** 把**认识自己**与**发现游戏**连接起来：从你玩过的作品和实际感受出发，探索自己珍视的满足感，再跨过熟悉的类型，寻找下一款可能值得投入的作品。
 
-## 可以由你改进的 Memory
+---
 
-Taste Memory 分开保存长期有用的用户原话、行为观察与待确认假设。**你的明确反馈优先于模型推断。** 纠正会修订相关假设，同时保留其他证据、反例和适用条件；修正后的记忆会进入后续推荐上下文，重启后也能继续使用。改进的是模型对**你的偏好**的理解，不是训练模型或让 Agent 自我演化推荐策略。
+## 它如何工作
 
-例如，你说“我喜欢自己发现规律，不是经营建造”，后续解释就应更重视自主发现，不能继续把建造当作已确认偏好。下一次推荐应说明候选游戏的行动和反馈为什么符合这一修正，并披露劝退点和未知信息。你可以查看、纠正、导出或删除记忆，对自己的体验拥有最终解释权。见[完整示例](examples/exploration.md)与[真实模型反馈／重启测试](docs/live-acceptance-2026-11-25.md)。
+- **自然切入，两个入口共享记忆**
+  无需填写问卷。你可以直接聊聊玩过或弃坑的作品，也可以主动授权导入官方 API 可访问的 Steam 游戏库。后续对话会读取本地保存的品味记忆与已导入的游戏库观察；当前没有通用的本地游戏安装目录扫描功能。
+- **以反馈与奖励机制为镜**
+  参照自我决定理论（SDT）、玩家体验量表（PXI）等已发表的游戏心理学研究，梳理 **行动 → 反馈 → 可能的心理满足 → 体验摩擦**。这里的“奖励”包括理解、进步、自主感等可能的主观满足，不仅指道具、数值或成就。这个分析框架是项目的推理方法，不是经过验证的统一心理学理论；个人洞察都是可被反驳和修正的探索性假设。
+- **正向契合 + 逆向排雷**
+  循着你偏爱的行动与反馈跨类型寻找候选，同时标出可能打断体验的摩擦点。推荐通常约三款，解释实际玩法、匹配理由、潜在劝退点、事实来源与未知信息。游戏事实按需通过 DSH 原生联网工具核实，用户的硬性排除条件优先。
+- **随反馈校准的品味记忆**
+  用户原话、游戏行为观察和动机假设分开记录，默认保存在本地。你的明确反馈优先于模型推断；长期有用的纠正会修订相关假设，同时保留反例、适用条件和其他偏好。修正后的记忆进入后续推荐上下文，重启后也可继续使用。你可以查看、改写、导出或清空。
 
-## 使用边界与隐私
+例如，你说“**我最喜欢的是自己发现规律，不是经营和建造**”，记忆就应据此修订，而不是继续把建造当作已确认偏好。下一次推荐也应体现这个区别。见[完整探索与修正示例](./examples/exploration.md)与[真实模型反馈／重启验证](./docs/live-acceptance-2026-11-25.md)。
 
-> Know Yourself Through Play 借鉴已发表的游戏心理学研究，结合你的游戏经历与反馈，帮助你探索个人游戏动机与体验偏好。所有个人分析均为探索性假设，仅供娱乐、自我反思与游戏选择参考，不构成医疗建议、心理咨询、心理测评或诊断，也不能替代专业服务。
+---
 
-不进行人格鉴定、临床判断、心理概率评分或多巴胺推断。理论与量表构念用于辅助推理；群体研究不能直接测量个人，相关性不能当作因果关系，也不向用户施测受保护量表题目。推荐和假设都可能出错，允许用户反驳和修正。
+## 快速开始
 
-Steam 导入需要主动授权。Taste Memory 默认保存在本地未加密的 JSON 文件中；相关记忆和游戏库观察会进入 DSH 上下文，并可能发送给配置的远程模型。本插件不启用遥测；DSH 与模型服务各有自己的留存和遥测设置。清空 Taste Memory 不会删除这些服务的记录或你的备份。导入前请阅读[隐私与数据处理说明](docs/privacy.md)。
+> **早期 MVP 说明**：当前面向 **DeepSeek Harness 0.2.3-alpha.2**，需要 Node **24.22.3+** 与 pnpm。插件复用 DSH 的模型、工具注册、原生联网与上下文能力，支持自然语言对话、持久化品味记忆及可选的 Steam 授权导入。其他 DSH 版本尚未验证。
 
-## 已实现
+1. 在已安装并配置好模型的 **DeepSeek Harness** 中安装、启用本插件，检查实际可用的原生联网工具。安装步骤见下方；插件入口配置见 `cordis.patch.yml` 与 `package.json`。
+2. 可以直接聊天；Steam 导入为可选项。需要导入时，在本机进程环境中配置 `STEAM_API_KEY`，再通过 CLI 明确同意本地存储与进入模型上下文。插件不自动加载 `.env`，也不接收 Steam 密码或 Cookie。详见[隐私说明](./docs/privacy.md)。
+3. 无需问卷，告诉它你喜欢、厌恶或放下了哪些作品，以及当时的实际感受。
 
-- 用 Action → Feedback → Reward → Friction 分析体验；这是项目推理框架，不宣称为经过验证的统一心理学理论。
-- 分开保存用户原话、Steam 行为观察、探索性动机假设；假设包含行动、反馈、奖励、摩擦、支持证据、反例、条件和确认状态。
-- 自然反馈修正相关假设、保留其他历史；下一次 DSH 上下文读取修正后的记忆。
-- 指导模型按动机推荐约三款游戏，说明真实机制、来源、劝退点和未知信息；直接使用 DSH 的 web_search / web_fetch，不建立游戏库或标签匹配器。
-- 本地 CLI 主动授权导入 Steam 官方 API 可见的游戏库。拥有、时长、近期游玩均不等于喜欢。
-- 支持查看、编辑、导出、逐条遗忘与清空。没有默认遥测、独立数据库、向量服务、多 Agent 系统或独立前后端。
-
-## 安装配置
-
-需要 Node **24.22.3+**、pnpm，以及单独安装并配置好的 **DeepSeek Harness 0.2.3-alpha.2**。其他版本尚未验证。模型凭据与可用的原生 Web Provider 在 DSH 中配置，插件不另建模型调用和搜索层。
+<details>
+<summary>安装、Steam 导入与记忆控制</summary>
 
 ```sh
 git clone https://github.com/Godel-Infinity-Machine/know-yourself-through-play.git
 cd know-yourself-through-play
 pnpm install --frozen-lockfile
 pnpm check
-# 仅在新建 gaming profile 时执行下面这一行：
+# 仅在新建 gaming profile 时执行；已有 profile 请跳过此行：
 dsh --profile gaming --from-default-profile tui --dump-config
 dsh plugin --profile gaming add .
 dsh --profile gaming --dump-config
 dsh --profile gaming
 ```
 
-新 profile 先从 `tui` 初始化，才有对话界面；已有 profile 请跳过 `--from-default-profile`，因为它会替换现有组合。仓库提供编译后的 `lib/`，不需要 Git 安装时执行 prepare 脚本。也可在初始化后用 `dsh plugin --profile gaming add github:Godel-Infinity-Machine/know-yourself-through-play#COMMIT_SHA` 安装经过审查的真实提交。没有声称已发布 npm 包。卸载用 `dsh plugin --profile gaming remove dsh-know-yourself-through-play`。
+`--from-default-profile` 会替换 profile 的现有组合，所以只用于新建。模型与可用的 Web Provider 在 DSH 中配置。仓库提供编译后的 `lib/`，没有声称已发布 npm 包。卸载用 `dsh plugin --profile gaming remove dsh-know-yourself-through-play`。
 
-默认记忆文件为 `~/.dsh/know-yourself-through-play/taste-memory.json`。通过环境变量 `KYTP_MEMORY_FILE` 设置 CLI 与 DSH 共同使用的绝对路径，或在 DSH profile patch 中配置：
+默认记忆文件为 `~/.dsh/know-yourself-through-play/taste-memory.json`。可用 `KYTP_MEMORY_FILE` 为 CLI 与 DSH 设置同一个绝对路径，或配置插件的 `memoryFile`。每个 profile／记忆文件用于一个本地用户。完整配置示例见 [English README](./README.md)。
 
-```yaml
-- id: know-yourself-through-play
-  config:
-    memoryFile: /absolute/private/path/taste-memory.json
-```
-
-一个 profile/文件只用于一个本地用户。当前版本源码未找到通用持久化 Taste Memory Provider，所以使用 JSON 降级；没有虚构 `ctx.memory`。见[核查记录](docs/dsh-verification.md)。
-
-## 两种入口
-
-直接与 DSH 交谈：
-
-> 我喜欢《星际拓荒》和《异星工厂》，它们可能有什么共同点？
->
-> 我最喜欢的是自己发现规律，不是经营建造。请记住这个修正，再推荐三款；排除重复战斗。
-
-自然反馈会修正相关假设，新解释仍为待确认。若要明确确认或否定状态，在聊天发送 `/taste confirm 假设ID` 或 `/taste reject 假设ID 原因`。它们是由模型处理的普通聊天文本，不是新增的原生斜杠菜单命令。`taste_memory` 工具会核验原话来自当前真实用户消息，防止把网页或模型内容存成用户事实。
-
-Steam 入口：先阅读[隐私说明与 Steam 条款](docs/privacy.md)，在本机环境中配置 `STEAM_API_KEY`，不要把密钥发到聊天、命令参数或仓库。SteamID64 是标识符，不是登录凭证；游戏详情必须允许官方 API 访问。
+在本机进程环境中配置密钥后，可选执行：
 
 ```sh
 node lib/cli.js help
 node lib/cli.js import-steam --steam-id YOUR_STEAMID64 --country YOUR_STORAGE_COUNTRY --consent-local-storage --consent-model-context
-dsh --profile gaming
 ```
 
-导入后说：“分析我的游戏库，把拥有与时长和明确喜欢分开，提出可修正的初步假设。”两种入口读取同一份记忆。`--country` 填实际存储机器所在国家，不按语言推断。两个 consent 参数分别确认本地保存、进入可能发往远程模型的上下文；这不是 Steam OAuth。同账户 15 分钟内使用缓存，`--refresh` 强制重新读取。不可访问时可手动描述喜欢、厌恶和玩过的游戏，不绕过隐私权限。
-
-## 记忆控制
+`--country` 填实际存储机器所在国家；两个 consent 参数分别确认本地保存及进入可能发送给远程模型的上下文，这不是 Steam OAuth 或账户所有权验证。游戏详情必须允许官方 API 访问；不可访问时可手动描述体验，不绕过隐私权限。同账户 15 分钟内可复用导入缓存，`--refresh` 显式重新读取。
 
 ```sh
 node lib/cli.js show
@@ -106,20 +86,31 @@ node lib/cli.js forget --id FACT_OR_HYPOTHESIS_ID --confirm-delete
 node lib/cli.js clear --confirm-delete
 ```
 
-所有命令可加 `--file 绝对路径`。导出不覆盖已有文件；编辑导出副本后可替换。遗忘会同时移除依赖该证据的假设。清空只清 Taste Memory，不删除 DSH 日志、模型服务记录或备份。数据未加密，请保护本机文件权限。
+所有命令可加 `--file 绝对路径`。导出不覆盖已有文件，改写通过编辑导出副本后替换完成；遗忘会移除依赖该证据的假设。自然反馈产生的修订仍是待确认假设；明确确认或否定可在聊天发送 `/taste confirm 假设ID` 或 `/taste reject 假设ID 原因`，由模型处理并由工具核验，不是新增的原生斜杠菜单命令。
 
-## 验证与限制
+</details>
 
-```sh
-pnpm typecheck
-pnpm build
-pnpm test
-pnpm bench
-pnpm audit:source
-```
+### 试试这样聊
 
-[真实测试报告](docs/validation.md)与[真实 DSH／模型验收](docs/live-acceptance-2026-11-25.md)区分本地原生集成测试、真实模型上的模拟偏好案例，以及授权游戏库检查。不能将提示词规则视为推荐质量、硬性排除或科学合规的确定性保证，不把成功案例宣称为 A–H 的普遍保证，也不编造完整响应耗时。当前动态上下文保留有效假设、相关与近期原话，以及时长最高的 25 款游戏；大型画像需要用户整理。
+- *“看看我已导入的 Steam 游戏库，把拥有、游玩时长与明确喜欢分开，提出几个我可以纠正的初步猜想。”*
+- *“我很喜欢《星际拓荒》和《异星工厂》，推荐几款类型不同、但行动与反馈同样可能戳中我的游戏。”*
+- *“为什么《蔚蓝》卡关我愿意反复尝试，遇到死亡惩罚很重或需要重复刷取的体验却很快失去耐心？”*
+- *“给我看看你目前对我游戏口味的猜想，我想改一改。”*
 
-[完整探索与修正示例](examples/exploration.md)是明确标注的人工示例，不是伪造模型运行记录。论文核验包括 SDT、PXI、BANGS、DEEP 和 28 Dimensions of Play，不复制受保护量表题目，不输出心理概率分数。
+---
 
-项目代码使用 MIT。依赖元数据为 MIT 与开发工具 TypeScript 的 Apache-2.0，详见[第三方说明](THIRD_PARTY_NOTICES.md)。**按用户要求，未向 DSH 社区提交。**
+## 克制与边界
+
+> Know Yourself Through Play 借鉴已发表的游戏心理学研究，结合你的游戏经历与反馈，帮助你探索个人游戏动机与体验偏好。所有个人分析均为探索性假设，仅供娱乐、自我反思与游戏选择参考，不构成医疗建议、心理咨询、心理测评或诊断，也不能替代专业服务。
+
+- **假设而非定论**：不进行人格鉴定、临床判断、心理概率评分或多巴胺推断。群体研究不能直接测量个人，相关性不能当作因果关系；拥有、时长、近期游玩均不等于喜欢。你对自身体验拥有最终解释权。
+- **记忆与数据归你掌控**：记忆默认保存在本地未加密的 JSON 文件中，但相关记忆和游戏库观察会进入 DSH 上下文，并可能发送给配置的远程模型。本插件不默认收集遥测；DSH 和模型服务另有自己的留存设置。清空记忆不会删除 DSH 日志、模型服务记录或备份。数据流向见[隐私说明](./docs/privacy.md)。
+- **诚实的能力边界**：心理学研究用于约束推理，记忆改善的是对用户偏好的理解，不是模型训练或 Agent 策略自我演化。推荐质量、事实核验、反馈解释与研究预算仍依赖配置的模型及可用工具，提示词不构成确定性保证。研究核验范围、真实测试与已知限制见[研究说明](./docs/research.md)和[验证记录](./docs/validation.md)。
+
+---
+
+## 开源协议
+
+[MIT](./LICENSE) · 第三方声明见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)
+
+按项目所有者要求，**尚未向 DeepSeek Harness 社区提交**。
