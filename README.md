@@ -1,7 +1,7 @@
 # Know Yourself Through Play
 
 *Addiction makes you lose yourself; the right game lets you recognize yourself.*  
-*Every game that stays with you has simply rewarded your actions in the way you value most.*
+*Every game that stays with you has simply rewarded your actions in the way that best fits your nature.*
 
 A game discovery and self-exploration plugin for **DeepSeek Harness**.  
 It isn't built to kill time or trap you in sticky engagement loops. Just talk about the games you've played, loved, or walked away from (with an optional authorized Steam library import). Looking through the **reward mechanisms** games use to answer your actions, it helps you see what genuinely moves you—and find the next game truly worth your time.
@@ -12,18 +12,14 @@ It isn't built to kill time or trap you in sticky engagement loops. Just talk ab
 
 ## Why Another Kind of Recommender
 
-Most game recommenders boil down to two habits:
+Most game recommenders are built to keep you hooked—relying on surface tags and compulsion loops to maximize playtime. **We don't measure success by how long you keep playing.**
 
-* **Matching the shell**: stacking genres, tags, and "players who bought A also bought B." The result often looks airtight on paper, yet feels strangely flat in your hands.
-* **Catering to compulsion**: optimizing quietly for playtime and retention through variable rewards, stat anxiety, and habit loops—leaving you feeling drained the moment the screen goes dark.
-
-**We don't measure success by how long you keep playing.**  
 What makes a session feel exhausting or deeply fulfilling is rarely how similar the surface looks, but **how a game's reward mechanisms respond to your actions**:
 
 * **Worlds apart on the surface, identical in reward**  
   *Outer Wilds* (cosmic exploration), *Factorio* (factory automation), and *Return of the Obra Dinn* (deductive mystery) share almost nothing in genre or aesthetics—yet all of them reward the same thing: pulling order out of the unknown, where understanding itself is the prize.
 * **Identical in tags, opposite in experience**  
-  Two notoriously difficult games can feel nothing alike. One turns every retry into crisp, unmistakable mastery; another erodes your patience with long runbacks, harsh rollback costs, or mechanical grinding.
+  Both *Celeste* and *Dark Souls* carry the "Difficult" tag, yet they feel nothing alike. *Celeste* turns every instant retry into crisp, unmistakable mastery; *Dark Souls* can erode a player's patience with long runbacks and steep rollback costs after every fall.
 
 **Know Yourself Through Play** treats games as a mirror: reflecting the rewards you cherish and the friction you avoid through the works you've played, then stepping outside genre bubbles to find games that bring real satisfaction.
 
