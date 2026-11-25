@@ -39,6 +39,68 @@
   使用 **Web Search** 与 推荐**Recent New Games** 两个按钮控制本 Session 的联网与新作筛选。
 ---
 
+## 安装、配置与首次运行
+
+### 1. 准备环境并安装
+
+已验证的环境为 **Node.js 24.22.3、pnpm 11.25.0、DSH 0.2.3-alpha.2**。请先安装 Node.js 与 Git，再在终端执行：
+
+```sh
+npm install --global pnpm@11.25.0 @deepseek-ai/dsh@0.2.3-alpha.2
+git clone https://github.com/Godel-Infinity-Machine/know-yourself-through-play.git
+cd know-yourself-through-play
+pnpm install --frozen-lockfile
+pnpm build
+```
+
+下面创建独立的 `kytp` Web profile 并安装当前目录的插件。**初始化命令仅用于首次创建**；`--from-default-profile` 会重置同名 profile，已有 `kytp` 时请换一个未使用的名称，并在后续命令中保持一致。
+
+```sh
+dsh --profile kytp --from-default-profile web --dump-config
+dsh plugin --profile kytp add .
+dsh --profile kytp --dump-config
+```
+
+最后一条命令的输出应包含 `dsh-know-yourself-through-play` 插件层。保留此本地仓库目录，供已安装的本地插件使用；无需手动复制 `cordis.patch.yml` 或修改 DSH 核心代码。
+
+### 2. 配置模型并启动
+
+```sh
+dsh --profile kytp
+```
+
+打开终端显示的本地地址（默认 `http://127.0.0.1:3080`）。在 DSH 的 **Settings → Models** 中配置模型提供商和 API Key，并选择可用模型；自定义网关还需填写正确的 API 地址、协议与模型名。详细字段见 [DSH 官方模型配置说明](https://github.com/deepseek-ai/deepseek-harness/blob/4b399c39a6d1479cd84ca591b4d7c88e24d38a96/docs/user/guide/providers.zh.md)。
+
+自然语言入口无需 Steam Key。Taste Memory 默认使用本机的 `~/.dsh/know-yourself-through-play/taste-memory.json`；如需换路径，在启动 DSH 和运行导入命令的终端中设置同一个 `KYTP_MEMORY_FILE` 绝对路径。模型配置中的密钥由 DSH 管理，不要写入仓库。
+
+### 3. 完成第一次对话
+
+新建会话，确认输入栏显示两个默认关闭的按钮，然后发送：
+
+> 我喜欢自己发现规律，但不喜欢重复刷取。请先提出可能的行动、反馈、奖励与摩擦偏好，再推荐三款游戏；不确定的地方请说明。
+
+默认使用模型已有知识和 Taste Memory，无需联网。随后可以说：
+
+> 请记住：我享受的是自己发现规律，不是经营建造本身。修正相关假设，再给我推荐。
+
+再询问“查看你目前的品味记忆”，核对是否保存了原话、修正了相关假设。需要实时资料时手动开启 **Web Search**；寻找近期正式版新作时开启 **Recent New Games**。联网还需要 DSH 已配置可用的原生 Web Provider。
+
+### 可选：导入已授权的 Steam 游戏库
+
+先阅读 [隐私说明](./docs/privacy.md)。Steam 游戏详情必须允许该 API 访问；不可访问时可继续直接聊游戏。下面在仓库目录执行，示例为 **PowerShell**：
+
+```powershell
+$env:STEAM_API_KEY = Read-Host "Steam Web API Key" -MaskInput
+node lib/cli.js import-steam --steam-id YOUR_STEAMID64 --country YOUR_STORAGE_COUNTRY --consent-local-storage --consent-model-context
+Remove-Item Env:STEAM_API_KEY
+```
+
+`Read-Host -MaskInput` 需要 PowerShell 7.1+；其他终端请使用其安全的环境变量设置方式。将占位符替换为你授权的 SteamID64 和**实际存储此数据的机器所在国家**。两个同意参数表示允许本地保存游戏库数据，并让它进入 DSH 模型上下文，可能发送给所配置的远程模型服务；只在同意这些用途时执行。插件仅从环境变量读取 Steam Key，**不会自动加载 `.env`**，也不需要 Steam 密码或 Cookie。
+
+导入成功后，在同一记忆路径的 DSH 会话中说“根据已导入的游戏库提出初步假设，区分拥有、游玩时长与明确喜好”。在仓库目录运行 `node lib/cli.js show` 可查看本地记忆；导出、修改与删除命令见 `node lib/cli.js help`。
+
+---
+
 ## 推荐模式
 
 DSH Web／桌面端输入栏提供两个会话开关（**Web Search** 与 **Recent New Games**；升级插件后请重启 DSH 以加载新版客户端入口）。
