@@ -39,6 +39,68 @@ What makes a session feel exhausting or deeply fulfilling is rarely how similar 
   Use **Web Search** and recommend **Recent New Games** to control this Session. 
 ---
 
+## Install, Configure, and Run
+
+### 1. Prepare the environment and install
+
+The verified environment is **Node.js 24.22.3, pnpm 11.25.0, and DSH 0.2.3-alpha.2**. Install Node.js and Git, then run:
+
+```sh
+npm install --global pnpm@11.25.0 @deepseek-ai/dsh@0.2.3-alpha.2
+git clone https://github.com/Godel-Infinity-Machine/know-yourself-through-play.git
+cd know-yourself-through-play
+pnpm install --frozen-lockfile
+pnpm build
+```
+
+Create a dedicated `kytp` Web profile and install the plugin from the current directory. **Run the initialization command only when creating the profile**: `--from-default-profile` resets an existing profile of that name. If `kytp` already exists, choose an unused name and use it consistently below.
+
+```sh
+dsh --profile kytp --from-default-profile web --dump-config
+dsh plugin --profile kytp add .
+dsh --profile kytp --dump-config
+```
+
+The final output should include the `dsh-know-yourself-through-play` bundle layer. Keep the local checkout available for the installed local plugin. There is no need to copy `cordis.patch.yml` manually or modify DSH core.
+
+### 2. Configure a model and start
+
+```sh
+dsh --profile kytp
+```
+
+Open the local URL printed by DSH (default: `http://127.0.0.1:3080`). In **Settings → Models**, configure your provider and API key, then select an available model. A custom gateway also requires the correct API base URL, protocol, and model ID. See the [official DSH model configuration guide](https://github.com/deepseek-ai/deepseek-harness/blob/4b399c39a6d1479cd84ca591b4d7c88e24d38a96/docs/user/guide/providers.md) for the fields.
+
+Natural conversation requires no Steam key. Taste Memory defaults to `~/.dsh/know-yourself-through-play/taste-memory.json` on your machine. To change its location, set the same absolute `KYTP_MEMORY_FILE` environment variable in the terminals running DSH and the import command. Model credentials are managed by DSH; keep them out of the repository.
+
+### 3. Have your first conversation
+
+Create a session, check that both input-bar buttons are visible and off, and send:
+
+> I enjoy discovering rules myself, but dislike repetitive grinding. Suggest possible action, feedback, reward, and friction preferences, then recommend three games. Explain what remains uncertain.
+
+The default uses model knowledge and Taste Memory without web access. Then try:
+
+> Remember this: I enjoy discovering rules myself, not management or construction for its own sake. Revise the relevant hypothesis and recommend again.
+
+Ask to see your current Taste Memory and check that your words were saved and the relevant hypothesis was revised. Enable **Web Search** manually for live sources, or **Recent New Games** for recent full releases. Networking also requires a working native DSH web provider.
+
+### Optional: Import an authorized Steam library
+
+Read [Privacy](./docs/privacy.md) first. Steam game details must be accessible to the official API; if they are unavailable, continue by discussing games directly. Run from the checkout; this example uses **PowerShell**:
+
+```powershell
+$env:STEAM_API_KEY = Read-Host "Steam Web API Key" -MaskInput
+node lib/cli.js import-steam --steam-id YOUR_STEAMID64 --country YOUR_STORAGE_COUNTRY --consent-local-storage --consent-model-context
+Remove-Item Env:STEAM_API_KEY
+```
+
+`Read-Host -MaskInput` requires PowerShell 7.1+; use your shell's secure environment-variable setup otherwise. Replace the placeholders with your authorized SteamID64 and **the country where the machine storing this data is located**. The consent flags allow local library storage and inclusion in DSH model context, potentially sending that data to your configured remote model provider; run only if you agree to both uses. The plugin reads the Steam key from the environment and **does not automatically load `.env`**. No Steam password or cookies are needed.
+
+After a successful import, ask DSH using the same memory path: “Suggest tentative motives from my imported library, distinguishing ownership, playtime, and explicit liking.” Run `node lib/cli.js show` from the checkout to inspect local memory; see `node lib/cli.js help` for export, editing, and deletion commands.
+
+---
+
 ## Recommendation Modes
 
 Two toggles sit in the DSH Web/desktop composer (**Web Search** and **Recent New Games**; restart DSH after upgrading so it loads the client entry).
