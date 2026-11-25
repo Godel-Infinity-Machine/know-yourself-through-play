@@ -1,6 +1,6 @@
 # Know Yourself Through Play
 
-[![Know Yourself Through Play demo](https://raw.githubusercontent.com/Godel-Infinity-Machine/know-yourself-through-play/main/docs/assets/demo.gif?v=06948323a7a2f34c2515661b984d0c185ca5e413)](https://github.com/Godel-Infinity-Machine/know-yourself-through-play/raw/refs/heads/main/docs/assets/know-yourself-through-play-demo.mp4)
+![Know Yourself Through Play demo](https://raw.githubusercontent.com/Godel-Infinity-Machine/know-yourself-through-play/main/docs/assets/demo.gif?v=06948323a7a2f34c2515661b984d0c185ca5e413)
 
 *Addiction makes you lose yourself; the right game lets you recognize yourself.*  
 *Every game that stays with you has simply rewarded your actions in the way that best fits your nature.*
