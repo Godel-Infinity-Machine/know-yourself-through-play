@@ -8,7 +8,36 @@ Understand the motivations behind your gaming experiences, discover what truly r
 
 [中文](README.zh-CN.md) · [Research](docs/research.md) · [Privacy](docs/privacy.md) · [Validation](docs/validation.md)
 
-An early MVP for **DSH 0.2.3-alpha.2**. Uses DSH's model, native web tools, tool registry and dynamic context. One persistent Taste Memory connects an explicitly authorized Steam import with natural-language exploration. It is an entertainment and reflection tool, not psychological assessment, counselling or diagnosis.
+**A game recommendation harness built around actions, feedback and possible psychological rewards, with a Taste Memory you can correct over time.** Implemented as a native plugin for **DeepSeek Harness 0.2.3-alpha.2**, it helps you explore what you enjoy doing in games, which responses make those actions satisfying, and what interrupts that experience. Through the games you play and the feedback you give, you can learn more about your own experience preferences.
+
+Its primary matching target is the experience you seek, rather than shared content, genres or Steam tags. Games from different genres can offer similar satisfaction through discovery, experimentation or mastery; similar-looking games can differ in feedback and failure costs. Content and genre still matter when you explicitly request or exclude them. The harness uses published game-psychology research as a reference for tentative explanations, not as proof that it has measured your motives.
+
+This is an early MVP. It reuses DSH's model, native web tools, tool registry and dynamic context. One persistent Taste Memory connects an explicitly authorized Steam import with natural-language exploration.
+
+## From play to possible motivations
+
+| Lens | What the companion explores |
+| --- | --- |
+| **Action** | What you enjoy actively doing: exploring, experimenting, creating, reasoning, practising or cooperating. |
+| **Feedback** | What makes you want to continue: new information, a clearer explanation, visible improvement or a responsive system. |
+| **Reward** | What satisfaction that might provide: autonomy, competence, curiosity, connection or meaning. These are possible interpretations, not measured scores. |
+| **Friction** | What weakens the experience: repetitive work, costly retries, unclear feedback or unwanted guidance. |
+
+**Action → Feedback → Reward → Friction is this project's reasoning scaffold, not a validated unified psychological theory.** Enjoying an action and enjoying its outcome are different possibilities. Owning a game, playing for many hours or playing recently does not establish liking or a particular psychological need.
+
+## Memory you can improve
+
+Taste Memory stores useful human statements, observed play and tentative hypotheses separately. Your explicit feedback takes priority over an inference. Corrections revise the relevant hypothesis while preserving unrelated evidence, counterexamples and conditions; the updated memory enters later recommendation context, including after a restart. This is refinement of the companion's understanding of **your preferences**, not model training or an agent that evolves its own strategy.
+
+For example, “I enjoy discovering rules, not managing production” should move the explanation toward autonomous discovery, rather than treating construction as an established preference. Later recommendations should explain how their actions and feedback fit that correction, while disclosing friction and unknowns. You can inspect, correct, export or delete memory, and you have the final say about your own experience. See the [worked example](examples/exploration.md) and [actual feedback/restart test](docs/live-acceptance-2026-11-25.md).
+
+## Scope and privacy
+
+> Know Yourself Through Play draws on published game-psychology research and your gaming experiences and feedback to help you explore personal gaming motivations and experience preferences. All personal analyses are exploratory hypotheses for entertainment, self-reflection and game selection. They do not constitute medical advice, psychological counselling, psychological assessment or diagnosis, and cannot replace professional services.
+
+The companion does not assign personality types, clinical labels, psychological probability scores or dopamine explanations. Published theories and scale constructs inform reasoning; group findings do not measure an individual, correlations do not establish causation, and no protected questionnaire items are administered. Recommendations and hypotheses can be wrong and remain open to correction.
+
+Steam import requires active consent. Taste Memory defaults to a local, unencrypted JSON file; relevant memory and library observations enter DSH context and may be sent to its configured remote model. This plugin enables no telemetry; DSH and model providers have their own retention and telemetry settings. Clearing Taste Memory does not delete their records or your backups. Read [privacy and data handling](docs/privacy.md) before importing.
 
 ## What it does
 
@@ -17,7 +46,7 @@ An early MVP for **DSH 0.2.3-alpha.2**. Uses DSH's model, native web tools, tool
 - Revises a specific hypothesis after user disagreement, preserves unrelated history, and injects the corrected memory into the next DSH model context.
 - Guides approximately three recommendations by motives and actual mechanics, with Steam links, sources, unknowns and friction. Native DSH web search/fetch verify candidates when available; there is no bundled game catalogue or genre/tag ranking engine.
 - Imports only a user-requested API-visible library, through the local CLI. Ownership and minutes never automatically become positive preferences.
-- Supports local inspect, edit, export, individual forgetting and complete Taste Memory clearing. No telemetry, database, vector store, separate agent runtime or frontend.
+- Supports local inspect, edit, export, individual forgetting and complete Taste Memory clearing. No plugin telemetry, database, vector store, separate agent runtime or frontend.
 
 ## Install
 
