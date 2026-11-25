@@ -1,5 +1,7 @@
 # Know Yourself Through Play
 
+[![Know Yourself Through Play demo](./docs/assets/demo.gif)](https://github.com/Godel-Infinity-Machine/know-yourself-through-play/raw/refs/heads/main/docs/assets/know-yourself-through-play-demo.mp4)
+
 *Addiction makes you lose yourself; the right game lets you recognize yourself.*  
 *Every game that stays with you has simply rewarded your actions in the way that best fits your nature.*
 
@@ -7,8 +9,6 @@ A game discovery and self-exploration plugin for **DeepSeek Harness**.
 It isn't built to kill time or trap you in sticky engagement loops. Just talk about the games you've played, loved, or walked away from (with an optional authorized Steam library import). Looking through the **reward mechanisms** games use to answer your actions, it helps you see what genuinely moves you—and find the next game truly worth your time.
 
 [中文](./README.zh-CN.md) · [Research](./docs/research.md) · [Privacy](./docs/privacy.md) · [Validation](./docs/validation.md)
-
-[Watch the demo](https://github.com/Godel-Infinity-Machine/know-yourself-through-play/raw/refs/heads/main/docs/assets/know-yourself-through-play-demo.mp4)
 
 ---
 

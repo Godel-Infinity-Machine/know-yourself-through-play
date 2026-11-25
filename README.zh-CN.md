@@ -1,5 +1,7 @@
 # Know Yourself Through Play
 
+[![Know Yourself Through Play demo](./docs/assets/demo.gif)](https://github.com/Godel-Infinity-Machine/know-yourself-through-play/raw/refs/heads/main/docs/assets/know-yourself-through-play-demo.mp4)
+
 *成瘾让人忘记自己，真正契合的游戏却能让你认出自己。*  
 *每款留在你心里的游戏，都恰好以最契合你天性的方式，回馈了你的行动。*
 
@@ -7,8 +9,6 @@
 它不为消磨时间，也不为把你困在黏性循环里。只需聊聊你玩过、喜欢或放弃的作品（也可按需导入已授权的 Steam 游戏库），它便通过**游戏回应行动的奖励机制**，帮你看清真正打动自己的原因，并找到下一款值得投入的作品。
 
 [English](./README.md) · [研究说明](./docs/research.md) · [隐私说明](./docs/privacy.md) · [验证记录](./docs/validation.md)
-
-[观看演示视频](https://github.com/Godel-Infinity-Machine/know-yourself-through-play/raw/refs/heads/main/docs/assets/know-yourself-through-play-demo.mp4)
 
 ---
 
