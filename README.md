@@ -27,8 +27,6 @@ What makes a session feel exhausting or deeply fulfilling is rarely how similar 
 
 ## Core Mechanisms
 
-* **Choose How to Discover Games Each Time**
-  Choose model knowledge or live web research for each recommendation request; if unspecified, the companion asks briefly. Knowledge mode makes no web calls and labels facts as unchecked live. Web mode uses available native DSH tools to find recent/new releases, check release dates/status and cite sources, without promising exhaustive latest-game coverage. If web access is unavailable, it asks before switching modes.
 * **Reward Mechanisms as a Mirror**  
   Grounded in published game-psychology research—including Self-Determination Theory (SDT) and the Player Experience Inventory (PXI)—to map how games reward action and where friction arises. Every insight is framed as a **tentative hypothesis** for you to test, never a personality label.
 * **Natural Conversation + Optional Steam Import**  
@@ -37,12 +35,12 @@ What makes a session feel exhausting or deeply fulfilling is rarely how similar 
   Surfaces cross-genre discoveries aligned with your preferred rewards while flagging potential friction points upfront, sparing you from games that look right but feel tiring.
 * **Editable Taste Memory**  
   Your preferences and taste hypotheses live locally by default and recalibrate with every piece of real feedback. You hold final authority—inspect, challenge, rewrite, or clear your memory at any time.
+* **Choose How to Discover Games Each Time**
+  Choose model knowledge or live web research for each recommendation request; if unspecified, the companion asks briefly. Knowledge mode makes no web calls and labels facts as unchecked live. Web mode uses available native DSH tools to find recent/new releases, check release dates/status and cite sources, without promising exhaustive latest-game coverage. If web access is unavailable, it asks before switching modes.
 
 ---
 
 ## Quick Start
-
-**Model capability affects results.** Models with stronger reasoning, nuanced feedback understanding and reliable tool use are generally better suited to this harness. Configure a capable model in DSH; it still does not guarantee accurate inferences or recommendations.
 
 > **Early MVP Note:** This is an early-stage native plugin for **DeepSeek Harness**. It directly reuses DSH's model, tool registry, web retrieval, and dynamic context, connecting natural-language exploration and optional authorized Steam imports to one persistent Taste Memory.
 
@@ -52,16 +50,17 @@ What makes a session feel exhausting or deeply fulfilling is rarely how similar 
 
 ### Try Asking
 
-* *"I'm a longtime player and already know most classics. Search the web for recent releases this time, recommend three that fit the actions and rewards you remember I enjoy, verify their release dates, and flag potential dealbreakers."*
 * *"I loved Outer Wilds and Factorio—recommend a few games in completely different genres that reward me in a similar way."*
 * *"Why am I happy to retry a hard screen in Celeste fifty times, yet instantly lose patience with heavy death penalties or endless grinding?"*
 * *"I'm in the mood for something built around observation and deduction, with zero busywork—and warn me about any dealbreakers."*
 * *"Show me what you currently assume about my gaming taste. A few of those feel off, and I want to correct them."*
+* * *"I'm a longtime player and already know most classics. Search the web for recent releases this time, recommend three that fit the actions and rewards you remember I enjoy, verify their release dates, and flag potential dealbreakers."*
 
 ---
 
 ## Restraint & Boundaries
 
+* **Model capability affects results.** Models with stronger reasoning, nuanced feedback understanding and reliable tool use are generally better suited to this harness. Configure a capable model in DSH; it still does not guarantee accurate inferences or recommendations.
 * **Hypotheses, Not Verdicts**: Psychological lenses serve purely as tools for reflection and game discovery—never psychological testing, personality typing, or medical diagnosis. Your lived experience always overrides any inference.
 * **Your Memory, Your Control**: Taste Memory is stored locally by default. See [Privacy](./docs/privacy.md) for Steam authorization scope and data boundaries.
 * **Honest Scope**: As an early MVP, recommendation coverage depends on available game metadata, authorized interfaces, and the validation scope documented in [Research](./docs/research.md) and [Validation](./docs/validation.md).
