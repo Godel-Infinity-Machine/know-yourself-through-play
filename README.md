@@ -1,72 +1,72 @@
 # Know Yourself Through Play
 
-*成瘾让人忘记自己，真正契合的游戏却能让你认出自己。*  
-*每款让你念念不忘的游戏，都恰好以你偏爱的方式，回馈了你的行动。*
+*Addiction makes you lose yourself; the right game lets you recognize yourself.*  
+*Every game that stays with you has simply rewarded your actions in the way you value most.*
 
-一个面向 **DeepSeek Harness** 的游戏发现与自我探索插件。  
-它不为消磨时间，也不为制造停不下来的黏性循环。只需聊聊你玩过、偏爱或中途放下的作品（也可按需导入已授权的 Steam 游戏库），它便透过**游戏对行动反馈的奖励机制**，陪你看清自己真正被怎样的回馈打动，并寻出下一款真正值得投入的游戏。
+A game discovery and self-exploration plugin for **DeepSeek Harness**.  
+It isn't built to kill time or trap you in sticky engagement loops. Just talk about the games you've played, loved, or walked away from (with an optional authorized Steam library import). Looking through the **reward mechanisms** games use to answer your actions, it helps you see what genuinely moves you—and find the next game truly worth your time.
 
-[English](./README.md) · [研究说明](./docs/research.md) · [隐私说明](./docs/privacy.md) · [验证记录](./docs/validation.md)
-
----
-
-## 为什么需要另一种推荐
-
-市面上大多数游戏推荐，归根结底只做两件事：
-
-* **拼凑外壳的相似**：看题材、堆标签、按品类归类，或者套用“买过 A 的人也买过 B”。结果常常是纸面上严丝合缝，上手却味同嚼蜡。
-* **迎合本能的成瘾**：以拉长时长、提高留存为隐性目标，靠随机刺激、数值焦虑与惯性拴住你。可关掉屏幕之后，留下的只有被掏空的疲惫。
-
-**我们不把“让你玩得更久”当作成功。**  
-决定一场游玩究竟是消耗还是丰盈的，从来不是题材外壳有多像，而是**你做出行动后，游戏以怎样的奖励机制回应了你**：
-
-* **外壳天差地别，奖赏却同出一源**  
-  《星际拓荒》的宇宙漫游、《异星工厂》的产线推演、《奥伯拉丁的回归》的线索勘破——题材和玩法毫无交集，却都在奖赏同一件事：在未知与复杂中理出秩序，让“看懂”本身成为回报。
-* **标签如出一辙，体验却南辕北辙**  
-  同样是高难度挑战，有的把每一次试错都变成清晰可控的精进，有的却用冗长跑图、高额回退或机械刷取，迅速磨光你的热情。
-
-**Know Yourself Through Play** 把游戏当作一面镜子：先借你玩过的作品，照见自己偏爱的奖赏与厌恶的阻力；再跳出既有的类型茧房，去寻找真正能带来满足感的新作。
+[中文](./README.zh-CN.md) · [Research](./docs/research.md) · [Privacy](./docs/privacy.md) · [Validation](./docs/validation.md)
 
 ---
 
-## 核心机制
+## Why Another Kind of Recommender
 
-* **以奖励机制为镜**  
-  参照自我决定理论（SDT）与玩家体验量表（PXI）等已发表的游戏心理学研究，梳理游戏对行动的奖励方式与潜在阻力。所有洞察都是供你审视的**探索性假设**，而非人格标签。
-* **自然对话 + 可选 Steam 授权导入**  
-  无需填写问卷。你可以直接用自然语言聊起玩过的作品，也可以按需接入已授权的 Steam 游戏库作为探索起点。
-* **奖赏匹配与精准排雷**  
-  既循着你偏爱的奖励机制跨类型寻游，也提前标出容易打断体验的摩擦点，少走“看着像、玩着累”的弯路。
-* **可随时修正的品味记忆**  
-  你的偏好记录与品味假设默认保存在本地，随每一次真实反馈动态校准；你拥有绝对的解释权，可以随时查看、反驳、改写或清空。
+Most game recommenders boil down to two habits:
 
----
+* **Matching the shell**: stacking genres, tags, and "players who bought A also bought B." The result often looks airtight on paper, yet feels strangely flat in your hands.
+* **Catering to compulsion**: optimizing quietly for playtime and retention through variable rewards, stat anxiety, and habit loops—leaving you feeling drained the moment the screen goes dark.
 
-## 快速开始
+**We don't measure success by how long you keep playing.**  
+What makes a session feel exhausting or deeply fulfilling is rarely how similar the surface looks, but **how a game's reward mechanisms respond to your actions**:
 
-> **早期 MVP 说明**：当前为面向 **DeepSeek Harness** 的早期版本，直接复用 DSH 的模型、工具注册、联网检索与上下文能力，将自然语言探索与可选的 Steam 授权导入连接在同一份持久化的品味记忆中。
+* **Worlds apart on the surface, identical in reward**  
+  *Outer Wilds* (cosmic exploration), *Factorio* (factory automation), and *Return of the Obra Dinn* (deductive mystery) share almost nothing in genre or aesthetics—yet all of them reward the same thing: pulling order out of the unknown, where understanding itself is the prize.
+* **Identical in tags, opposite in experience**  
+  Two notoriously difficult games can feel nothing alike. One turns every retry into crisp, unmistakable mastery; another erodes your patience with long runbacks, harsh rollback costs, or mechanical grinding.
 
-1. 在 **DeepSeek Harness** 中安装并启用本插件（配置见 `cordis.patch.yml` 与 `package.json`）。
-2. 如需结合已授权的 Steam 游戏库信息，可在 `.env` 中按需配置（详见 [隐私说明](./docs/privacy.md)）。
-3. 无需问卷，直接开口聊天即可。
-
-### 试试这样聊
-
-* *“我很喜欢《星际拓荒》和《异星工厂》，推荐几款类型完全不同、但奖励机制同样能打动我的游戏。”*
-* *“为什么《蔚蓝》卡关我愿意反复尝试，遇到死亡惩罚很重或靠刷刷刷留住人的游戏却会立刻失去耐心？”*
-* *“最近想玩点靠观察与推理理清脉络的作品，不要重复劳作，顺便帮我排排雷。”*
-* *“给我看看你现在对我游戏口味的猜想，我觉得有几条不准，想改一改。”*
+**Know Yourself Through Play** treats games as a mirror: reflecting the rewards you cherish and the friction you avoid through the works you've played, then stepping outside genre bubbles to find games that bring real satisfaction.
 
 ---
 
-## 克制与边界
+## Core Mechanisms
 
-* **假设而非定论**：所有心理学视角仅作自我认识与选游参考，不构成心理测评、人格鉴定或医学诊断。你的真实感受永远高于一切推断。
-* **记忆归你掌控**：品味记忆默认保存在本地，Steam 授权范围与数据流向详见 [隐私说明](./docs/privacy.md)。
-* **诚实的能力边界**：作为早期 MVP，推荐覆盖度受限于现有游戏资料、可用接口与验证范围，详见 [研究说明](./docs/research.md) 与 [验证记录](./docs/validation.md)。
+* **Reward Mechanisms as a Mirror**  
+  Grounded in published game-psychology research—including Self-Determination Theory (SDT) and the Player Experience Inventory (PXI)—to map how games reward action and where friction arises. Every insight is framed as a **tentative hypothesis** for you to test, never a personality label.
+* **Natural Conversation + Optional Steam Import**  
+  No questionnaires required. Start by chatting naturally about games you've played, or optionally connect an explicitly authorized Steam library as a starting point.
+* **Reward Matching & Dealbreaker Filtering**  
+  Surfaces cross-genre discoveries aligned with your preferred rewards while flagging potential friction points upfront, sparing you from games that look right but feel tiring.
+* **Editable Taste Memory**  
+  Your preferences and taste hypotheses live locally by default and recalibrate with every piece of real feedback. You hold final authority—inspect, challenge, rewrite, or clear your memory at any time.
 
 ---
 
-## 开源协议
+## Quick Start
 
-[MIT](./LICENSE) · 第三方声明见 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)
+> **Early MVP Note:** This is an early-stage native plugin for **DeepSeek Harness**. It directly reuses DSH's model, tool registry, web retrieval, and dynamic context, connecting natural-language exploration and optional authorized Steam imports to one persistent Taste Memory.
+
+1. Install and enable the plugin in **DeepSeek Harness** (see `cordis.patch.yml` and `package.json`).
+2. If you want to include authorized Steam library context, configure your credentials in `.env` (see [Privacy](./docs/privacy.md)).
+3. Skip the onboarding forms—just start a conversation.
+
+### Try Asking
+
+* *"I loved Outer Wilds and Factorio—recommend a few games in completely different genres that reward me in a similar way."*
+* *"Why am I happy to retry a hard screen in Celeste fifty times, yet instantly lose patience with heavy death penalties or endless grinding?"*
+* *"I'm in the mood for something built around observation and deduction, with zero busywork—and warn me about any dealbreakers."*
+* *"Show me what you currently assume about my gaming taste. A few of those feel off, and I want to correct them."*
+
+---
+
+## Restraint & Boundaries
+
+* **Hypotheses, Not Verdicts**: Psychological lenses serve purely as tools for reflection and game discovery—never psychological testing, personality typing, or medical diagnosis. Your lived experience always overrides any inference.
+* **Your Memory, Your Control**: Taste Memory is stored locally by default. See [Privacy](./docs/privacy.md) for Steam authorization scope and data boundaries.
+* **Honest Scope**: As an early MVP, recommendation coverage depends on available game metadata, authorized interfaces, and the validation scope documented in [Research](./docs/research.md) and [Validation](./docs/validation.md).
+
+---
+
+## License
+
+[MIT](./LICENSE) · See [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md) for third-party notices.
