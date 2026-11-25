@@ -1,6 +1,6 @@
 # Know Yourself Through Play
 
-[![Know Yourself Through Play demo](https://raw.githubusercontent.com/Godel-Infinity-Machine/know-yourself-through-play/main/docs/assets/demo.gif?v=06948323a7a2f34c2515661b984d0c185ca5e413)](https://github.com/Godel-Infinity-Machine/know-yourself-through-play/raw/refs/heads/main/docs/assets/know-yourself-through-play-demo.mp4)
+![Know Yourself Through Play demo](https://raw.githubusercontent.com/Godel-Infinity-Machine/know-yourself-through-play/main/docs/assets/demo.gif?v=06948323a7a2f34c2515661b984d0c185ca5e413)
 
 *成瘾让人忘记自己，真正契合的游戏却能让你认出自己。*  
 *每款留在你心里的游戏，都恰好以最契合你天性的方式，回馈了你的行动。*
