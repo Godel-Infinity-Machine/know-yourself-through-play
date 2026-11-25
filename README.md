@@ -36,45 +36,41 @@ What makes a session feel exhausting or deeply fulfilling is rarely how similar 
 * **Editable Taste Memory**  
   Your preferences and taste hypotheses live locally by default and recalibrate with every piece of real feedback. You hold final authority—inspect, challenge, rewrite, or clear your memory at any time.
 * **Input-Bar Recommendation Controls**
-  Use **Web Search** and **Recent New Games** to control this Session. Both default off, with no recurring question about web access.
-
+  Use **Web Search** and recommend **Recent New Games** to control this Session. 
 ---
 
 ## Recommendation Modes
 
-Two buttons sit in the existing DSH Web/compatible desktop composer. A checkmark and bold styling show selection. Restart DSH after upgrading an existing installation so it reads the new client entry.
+Two toggles sit in the DSH Web/desktop composer (**Web Search** and **Recent New Games**; restart DSH after upgrading so it loads the client entry).
 
 | Web Search | Recent New Games | Behavior |
 | --- | --- | --- |
-| Off (default) | Off (default) | Model knowledge and Taste Memory only; native Web Search/Web Fetch denied; no question about enabling the web. |
-| On | Off | Native web tools allowed; discover games by motivations and rewards with no release-date restriction. |
-| On | On | Prioritize recent full releases; verify name, release date/status and core mechanics, distinguish full release, Early Access and unreleased titles, and match Taste Memory. |
+| Off (default) | Off (default) | Uses model knowledge and local Taste Memory only; web tools are blocked. |
+| On | Off | Allows native web search/fetch to discover games by reward mechanisms with no date restriction. |
+| On | On | Prioritizes recent **full releases**, verifying title, release date/status (Full Release vs. Early Access vs. unreleased), and core mechanics against your Taste Memory. |
 
-Enabling **Recent New Games** enables **Web Search**. Disabling the former leaves the latter unchanged. Disabling **Web Search** clears both. State is isolated per Session in Host memory, never in long-term Taste Memory; Host restart or Session reload resets it to off. Controls disable briefly during state reads/updates, not throughout model generation.
+* **Toggle coupling**: Turning on **Recent New Games** automatically enables **Web Search**; turning off **Web Search** clears both.
+* **Session-scoped**: Switch states live in Host memory per session (never saved to Taste Memory) and reset to Off on restart or reload.
+* **No chat override**: TUI and headless SDK surfaces have no toggles and stay offline—asking to "search the web" in chat cannot override the switch.
 
-DSH's native `tools.guard` checks the switch before registered `web_search` and `web_fetch` tool bodies execute; missing Session identity fails closed. Turning off blocks new calls, but cannot retract requests already sent. This is not a global network firewall for arbitrary shell commands, third-party plugins or other networking tools. Enabled web access still needs usable native DSH providers. Unavailable research is disclosed; recent-release filtering is model-guided and does not promise exhaustive coverage.
+<details>
+<summary>Technical boundaries &amp; guardrails</summary>
 
-TUI/headless SDK surfaces have no buttons and default to model knowledge. A request in chat cannot change permission.
+* DSH's native `tools.guard` checks the session switch before executing `web_search` or `web_fetch` (missing session identity fails closed). Turning the switch off blocks new calls, though in-flight requests cannot be retracted.
+* This switch governs native DSH web tools only, not a global firewall for arbitrary shell commands or third-party plugins.
+* Web-enabled modes still require a configured, working DSH web provider; unavailable search results are disclosed rather than fabricated, and recent-release filtering is model-guided rather than exhaustive.
 
----
+</details>
 
-## Quick Start
+## Try Asking
 
-> **Early MVP Note:** This is an early-stage native plugin for **DeepSeek Harness**. It directly reuses DSH's model, tool registry, web retrieval, and dynamic context, connecting natural-language exploration and optional authorized Steam imports to one persistent Taste Memory.
+Each prompt below targets a core capability—from diagnosing why popular games bounce off you to refining your Taste Memory.
 
-1. Install and enable the plugin in **DeepSeek Harness** (see `cordis.patch.yml` and `package.json`).
-2. If you want to include authorized Steam library context, configure your credentials in `.env` (see [Privacy](./docs/privacy.md)).
-3. Skip the onboarding forms—just start a conversation.
-
-### Try Asking
-
-For the recent-release example below, select **Recent New Games** first; it also enables **Web Search**.
-
-* *"I loved Outer Wilds and Factorio—recommend a few games in completely different genres that reward me in a similar way."*
-* *"Why am I happy to retry a hard screen in Celeste fifty times, yet instantly lose patience with heavy death penalties or endless grinding?"*
-* *"I'm in the mood for something built around observation and deduction, with zero busywork—and warn me about any dealbreakers."*
-* *"Show me what you currently assume about my gaming taste. A few of those feel off, and I want to correct them."*
-* *"I'm a longtime player and already know most classics. Search the web for recent releases this time, recommend three that fit the actions and rewards you remember I enjoy, verify their release dates, and flag potential dealbreakers."*
+* **Cross-genre discovery (beyond surface tags)**: *"I've sunk hundreds of hours into Slay the Spire and Into the Breach, even though I normally bounce off turn-based RPGs. What am I actually chasing here, and what completely different genres deliver that same feeling?"*
+* **Diagnosing a mismatch (especially with Steam import)**: *"Looking at my play history, I dropped massive hits like Red Dead Redemption 2 within five hours, yet played Balatro non-stop. Help me figure out what specific friction turns me off and what feedback loops hook me."*
+* **Constraint-based filtering (dealbreakers first)**: *"I'm burnt out after work—recommend something I can finish a run of in 20 minutes without heavy story reading or twitch reflexes, while still giving me strategic planning satisfaction. Flag any hidden dealbreakers."*
+* **Challenging & editing Taste Memory**: *"Show me what you currently assume about my gaming taste. Also, correct one thing: I don't actually dislike high difficulty—I just hate losing progress to long runbacks. Update that."*
+* **Recent full-release search** *(select **Recent New Games** first)*: *"I've already played most classic single-player strategy and deduction games. Search the web for recent full releases (skip Early Access) from the past few months that fit my preferences, verify their release dates, and warn me about potential friction."*
 
 ---
 
