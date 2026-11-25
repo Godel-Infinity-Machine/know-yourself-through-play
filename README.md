@@ -35,8 +35,26 @@ What makes a session feel exhausting or deeply fulfilling is rarely how similar 
   Surfaces cross-genre discoveries aligned with your preferred rewards while flagging potential friction points upfront, sparing you from games that look right but feel tiring.
 * **Editable Taste Memory**  
   Your preferences and taste hypotheses live locally by default and recalibrate with every piece of real feedback. You hold final authority—inspect, challenge, rewrite, or clear your memory at any time.
-* **Choose How to Discover Games Each Time**
-  Choose model knowledge or live web research for each recommendation request; if unspecified, the companion asks briefly. Knowledge mode makes no web calls and labels facts as unchecked live. Web mode uses available native DSH tools to find recent/new releases, check release dates/status and cite sources, without promising exhaustive latest-game coverage. If web access is unavailable, it asks before switching modes.
+* **Input-Bar Recommendation Controls**
+  Use **Web Search** and **Recent New Games** to control this Session. Both default off, with no recurring question about web access.
+
+---
+
+## Recommendation Modes
+
+Two buttons sit in the existing DSH Web/compatible desktop composer. A checkmark and bold styling show selection. Restart DSH after upgrading an existing installation so it reads the new client entry.
+
+| Web Search | Recent New Games | Behavior |
+| --- | --- | --- |
+| Off (default) | Off (default) | Model knowledge and Taste Memory only; native Web Search/Web Fetch denied; no question about enabling the web. |
+| On | Off | Native web tools allowed; discover games by motivations and rewards with no release-date restriction. |
+| On | On | Prioritize recent full releases; verify name, release date/status and core mechanics, distinguish full release, Early Access and unreleased titles, and match Taste Memory. |
+
+Enabling **Recent New Games** enables **Web Search**. Disabling the former leaves the latter unchanged. Disabling **Web Search** clears both. State is isolated per Session in Host memory, never in long-term Taste Memory; Host restart or Session reload resets it to off. Controls disable briefly during state reads/updates, not throughout model generation.
+
+DSH's native `tools.guard` checks the switch before registered `web_search` and `web_fetch` tool bodies execute; missing Session identity fails closed. Turning off blocks new calls, but cannot retract requests already sent. This is not a global network firewall for arbitrary shell commands, third-party plugins or other networking tools. Enabled web access still needs usable native DSH providers. Unavailable research is disclosed; recent-release filtering is model-guided and does not promise exhaustive coverage.
+
+TUI/headless SDK surfaces have no buttons and default to model knowledge. A request in chat cannot change permission.
 
 ---
 
@@ -49,6 +67,8 @@ What makes a session feel exhausting or deeply fulfilling is rarely how similar 
 3. Skip the onboarding forms—just start a conversation.
 
 ### Try Asking
+
+For the recent-release example below, select **Recent New Games** first; it also enables **Web Search**.
 
 * *"I loved Outer Wilds and Factorio—recommend a few games in completely different genres that reward me in a similar way."*
 * *"Why am I happy to retry a hard screen in Celeste fifty times, yet instantly lose patience with heavy death penalties or endless grinding?"*

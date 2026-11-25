@@ -5,15 +5,31 @@ import { JsonTasteStore, memoryPath } from './store.js'
 import { recommendationContext, updateMemory, type MemoryOperation, type HumanEvidence } from './memory.js'
 import { text } from './model.js'
 import { POLICY } from './policy.js'
+import { SessionResearch, ResearchControls, RESEARCH_REMOTE, WEB_TOOLS, researchContext } from './research.js'
+import type {} from '@deepseek-ai/dsh-session'
 
 export const name = 'know-yourself-through-play'
-export const inject = ['tools', 'systemPrompt']
+export const inject = ['tools', 'systemPrompt', 'sessions']
 export interface Config { memoryFile?: string }
 
 export async function apply(ctx: Context, config: Config = {}): Promise<void> {
   if (config.memoryFile !== undefined && typeof config.memoryFile !== 'string') throw new Error('memoryFile must be a local path')
   const store = new JsonTasteStore(memoryPath(config.memoryFile))
   await store.load()
+  const research = new SessionResearch()
+  ctx.on('session/disposed', session => research.delete(session))
+  ctx.tools.guard(exec => WEB_TOOLS.has(exec.name) && !research.get(exec.agent?.session).web
+    ? 'Web Search is OFF for this Session. Only the human input-bar controls can enable native web tools.' : undefined)
+  ctx.systemPrompt.context({ name: 'kytp:research', order: 651, required: true,
+    text: context => researchContext(research.get(context.session)), interpolate: false })
+  ctx.inject(['typert'], scope => {
+    scope.plugin(ResearchControls, research)
+    const registry = scope.get('typert')
+    if (!registry || !('register' in registry) || typeof registry.register !== 'function') throw new Error('Native Typert registry unavailable')
+    const register = registry.register.bind(registry)
+    scope.effect(() => register({ ...RESEARCH_REMOTE, face: 'host', schemas: [],
+      invocations: RESEARCH_REMOTE.descriptors, model: { services: [], events: [], objects: [] } }))
+  })
   ctx.systemPrompt.section({ name: 'kytp:policy', order: 650, text: POLICY, interpolate: false })
   ctx.systemPrompt.context({ name: 'kytp:taste', order: 650, required: true, text: () => recommendationContext(store.snapshot()), interpolate: false })
   // Context providers are synchronous in this DSH release. Refresh disk in its documented async waterfall.
