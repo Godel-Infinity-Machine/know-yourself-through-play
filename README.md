@@ -50,7 +50,6 @@ Each prompt below targets a core capability—from diagnosing why popular games 
 * **Challenging & editing Taste Memory**: *"Show me what you currently assume about my gaming taste. Also, correct one thing: I don't actually dislike high difficulty—I just hate losing progress to long runbacks. Update that."*
 * **Recent full-release search** *(select **Recent New Games** first)*: *"I've already played most classic single-player strategy and deduction games. Search the web for recent full releases (skip Early Access) from the past few months that fit my preferences, verify their release dates, and warn me about potential friction."*
 ---
-
 ## Install, Configure, and Run
 
 ### 1. Prepare the environment and install
@@ -107,7 +106,7 @@ node lib/cli.js import-steam --steam-id YOUR_STEAMID64 --country YOUR_STORAGE_CO
 Remove-Item Env:STEAM_API_KEY
 ```
 
-`Read-Host -MaskInput` requires PowerShell 7.1+; use your shell's secure environment-variable setup otherwise. Replace the placeholders with your authorized SteamID64 and **the country where the machine storing this data is located**. The consent flags allow local library storage and inclusion in DSH model context, potentially sending that data to your configured remote model provider; run only if you agree to both uses. The plugin reads the Steam key from the environment and **does not automatically load `.env`**. No Steam password or cookies are needed.
+`Read-Host -MaskInput` requires PowerShell 7.1+; use your shell's secure environment-variable setup otherwise. Replace the placeholders with your authorized SteamID64 and **the country where the machine storing this data is located**. The consent flags allow local library storage and inclusion in DSH model context, potentially sending that data to your configured remote model provider; run only if you agree to both uses. The plugin reads the Steam key from the environment and **does not automatically load .env**. No Steam password or cookies are needed.
 
 After a successful import, ask DSH using the same memory path: “Suggest tentative motives from my imported library, distinguishing ownership, playtime, and explicit liking.” Run `node lib/cli.js show` from the checkout to inspect local memory; see `node lib/cli.js help` for export, editing, and deletion commands.
 
@@ -150,3 +149,6 @@ Two toggles sit in the DSH Web/desktop composer (**Web Search** and **Recent New
 ## License
 
 [MIT](./LICENSE) · See [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md) for third-party notices.
+
+## Personal Game Agent
+An evolving personal game agent that learns your preferences through gameplay history, conversations, and feedback, helping you understand yourself through play and discover games that truly resonate with you.
